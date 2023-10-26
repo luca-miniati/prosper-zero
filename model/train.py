@@ -13,10 +13,10 @@ hidden_size2 = 64
 hidden_size3 = 16
 ouput_size = 2
 num_epochs = 50
-batch_size = 128 
+batch_size = 8
 learning_rate = 0.003  # Learning rate for the optimizer
 
-train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_training.csv')
+train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'mega_training.csv')
 val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'short_val.csv')
 
 train_dataset = ListingsDataset(dataset_path=train_path, dataset_type="train")
@@ -54,7 +54,7 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
         
-        if (i + 1) % 100 == 0:
+        if (i + 1) % 10000 == 0:
             print(f'epoch {epoch + 1} / {num_epochs}, step {i + 1}/{n_total_steps}, loss = {loss.item():.4f}')
     
     # torch.save(model.state_dict, f'epochs\epoch{epoch}.pth')
@@ -72,7 +72,7 @@ for epoch in range(num_epochs):
         rounded_outputs = torch.round(outputs)
 
         correct_preds += (rounded_outputs == _labels).sum().item()
-        total_preds += _labels.size(0)
+        total_preds += _labels.shape(0)
 
     if min_loss == 0:
         min_loss = total_loss
