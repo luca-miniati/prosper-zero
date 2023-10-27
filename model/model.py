@@ -9,20 +9,20 @@ class RiskModel(nn.Module):
         self.l3 = nn.Linear(hidden2, hidden3)
         self.l4 = nn.Linear(hidden3, output)
 
-        self.relu = nn.ReLU()
-        self.sigmoid = nn.Sigmoid()
+        self.relu = nn.LeakyReLU()
+        self.softmax = nn.Softmax(dim=1)
     
     def forward(self, x):
         out = self.l1(x)
-        out = self.relu(out)
+        # out = self.relu(out)
         
         out = self.l2(out)
-        out = self.relu(out)
+        # out = self.relu(out)
 
         out = self.l3(out)
-        out = self.relu(out)
+        # out = self.relu(out)
 
         out = self.l4(out)
-        out = self.sigmoid(out)
+        out = self.softmax(out)
 
         return out
