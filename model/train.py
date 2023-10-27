@@ -8,11 +8,12 @@ from data import ListingsDataset
 from model import RiskModel
 
 
-hidden_size1 = 128 
-hidden_size2 = 64
-hidden_size3 = 16
+hidden_size1 = 128
+hidden_size2 = 256
+hidden_size3 = 128
+hidden_size4 = 32
 ouput_size = 2
-num_epochs = 1
+num_epochs = 100
 batch_size = 128
 learning_rate = 0.003  # Learning rate for the optimizer
 
@@ -29,7 +30,7 @@ train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=bat
 validation_loader = torch.utils.data.DataLoader(dataset=validation_dataset, batch_size=batch_size, shuffle=False)
 print("All data loaded.")
 
-model = RiskModel(input_size=input_size, hidden1=hidden_size1, hidden2=hidden_size2, hidden3=hidden_size3, output=ouput_size)
+model = RiskModel(input_size=input_size, hidden1=hidden_size1, hidden2=hidden_size2, hidden3=hidden_size3, hidden4=hidden_size4, output=ouput_size)
 
 criterion = nn.BCELoss()
 
@@ -54,8 +55,8 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
         
-        if (i + 1) % 100 == 0:
-            print(f'epoch {epoch + 1} / {num_epochs}, step {i + 1}/{n_total_steps}, loss = {loss.item():.4f}')
+        if (i + 1) % 1000 == 0:
+            print(f'epoch {epoch+1} / {num_epochs}, step {i + 1}/{n_total_steps}, loss = {loss.item():.4f}')
     
     # torch.save(model.state_dict, f'epochs\epoch{epoch}.pth')
     
@@ -81,8 +82,8 @@ for epoch in range(num_epochs):
         min_epoch = epoch
 
     accuracy = correct_preds / total_preds
-    print(f'Accuracy: {accuracy * 100:.2f}% at epoch: {epoch}')
-    print(f'epoch {epoch}, loss = {total_loss:4f}, min loss = {min_loss:4f} at epoch: {min_epoch}')
+    print(f'Accuracy: {accuracy * 100:.2f}% at epoch: {epoch+1}')
+    print(f'epoch {epoch+1}, loss = {total_loss:4f}, min loss = {min_loss:4f} at epoch: {min_epoch+1}')
     #write output and expected output to a csv file
         
 
