@@ -185,7 +185,7 @@ print(f'Total training file saved to {mega_training_file}')
 print(f'Total validation file saved to {mega_validation_file}')
 
 train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'mega_training.csv')
-
+val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'mega_val.csv')
 
 df = pd.read_csv(train_path)
 
@@ -200,3 +200,17 @@ balanced_df = balanced_df.sample(frac=1).reset_index(drop=True)
 balanced_df.to_csv('balanced_mega_training.csv', index=False)
 
 print(f'Balanced training file saved to balanced_mega_training.csv')
+
+df = pd.read_csv(val_path)
+
+loan_status_0 = df[df['loan_status'] == 0]
+loan_status_1 = df[df['loan_status'] == 1]
+
+sampled_loan_status = loan_status_0.sample(len(loan_status_1))
+
+balanced_df = pd.concat([sampled_loan_status, loan_status_1])
+balanced_df = balanced_df.sample(frac=1).reset_index(drop=True)
+
+balanced_df.to_csv('balanced_mega_val.csv', index=False)
+
+print(f'Balanced val file saved to balanced_mega_val.csv')
