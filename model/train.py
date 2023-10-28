@@ -8,10 +8,10 @@ from data import ListingsDataset
 from model import RiskModel
 
 
-hidden_size1 = 128
-hidden_size2 = 256
-hidden_size3 = 128
-hidden_size4 = 32
+hidden_size1 = 64
+hidden_size2 = 64
+# hidden_size3 = 128
+# hidden_size4 = 32
 ouput_size = 2
 num_epochs = 100
 batch_size = 128
@@ -30,7 +30,8 @@ train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=bat
 validation_loader = torch.utils.data.DataLoader(dataset=validation_dataset, batch_size=batch_size, shuffle=False)
 print("All data loaded.")
 
-model = RiskModel(input_size=input_size, hidden1=hidden_size1, hidden2=hidden_size2, hidden3=hidden_size3, hidden4=hidden_size4, output=ouput_size)
+# model = RiskModel(input_size=input_size, hidden1=hidden_size1, hidden2=hidden_size2, hidden3=hidden_size3, hidden4=hidden_size4, output=ouput_size)
+model = RiskModel(input_size=input_size, hidden1=hidden_size1, hidden2=hidden_size2, output=ouput_size, dropout_prob=0.1)
 
 criterion = nn.BCELoss()
 
