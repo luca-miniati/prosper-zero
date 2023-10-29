@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 warnings.filterwarnings("ignore")
 
+'''
 if not os.path.exists('data/raw'):
     os.makedirs('data/raw')
 if not os.path.exists('data/clean'):
@@ -92,14 +93,23 @@ for listings_path, loans_path in tqdm(zip(all_listings, all_loans)):
         validate='1:1'
     )
 
-    listings_final.drop('origination_date', axis=1, inplace=True)
+    drop_cols = [
+        'amount_borrowed',
+        'origination_date', 
+        'prosper_rating',
+        'borrower_apr',
+        'prosper_score',
+        'borrower_apr',
+    ]
+
+    listings_final.drop(drop_cols, axis=1, inplace=True)
 
     listings_final_no_encode = listings_final.copy()
 
     if not os.path.exists('label_encoders'):
         os.makedirs('label_encoders')
 
-    categorical_cols = ['fico_score', 'employment_status_description', 'income_verifiable', 'occupation', 'prosper_rating']
+    categorical_cols = ['fico_score', 'employment_status_description', 'income_verifiable', 'occupation']
 
     for col in categorical_cols:
         with open(f'label_encoders/le_{col}.pkl', 'rb') as f:
@@ -143,13 +153,11 @@ scale_factors = {
     'fico_score' : 10,
     'investment_typeid' : 10,
     'listing_category_id' : 20,
-    'prosper_score' : 20,
     'income_range' : 10,
     'months_employed' : 200,
     'occupation' : 200,
     'listing_monthly_payment' : 1000,
     'stated_monthly_income' : 30000,
-    'amount_borrowed' : 40000,
     'prior_prosper_loans' : 10
 }
 
@@ -184,6 +192,7 @@ mega_validation_df.to_csv(mega_validation_file, index=False)
 print(f'Total training file saved to {mega_training_file}')
 print(f'Total validation file saved to {mega_validation_file}')
 
+'''
 train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'mega_training.csv')
 val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'mega_val.csv')
 
