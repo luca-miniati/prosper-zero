@@ -5,8 +5,8 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_training.csv')
-val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_val.csv')
+train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'loans_data_train.csv')
+val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'loans_data_val.csv')
 
 
 train_data = pd.read_csv(train_path)
@@ -27,7 +27,7 @@ X_validation = val_data.drop('loan_status', axis=1)
 y_validation = val_data['loan_status']
 
 
-model = LogisticRegression(solver='sag', class_weight='balanced', max_iter=100)
+model = LogisticRegression(solver='sag', class_weight='balanced', max_iter=500, penalty="l2")
 print(f'Data loaded and model initialized')
 model.fit(X_train, y_train)
 
