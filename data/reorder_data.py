@@ -9,19 +9,25 @@ val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'cle
 train_df = pd.read_csv(train_path)
 val_df = pd.read_csv(val_path)
 
+# column_order = [
+#     'fico_score',
+#     'lender_yield',
+#     'income_range',
+#     'listing_monthly_payment',
+#     'stated_monthly_income',
+#     'lender_indicator',
+#     'prior_prosper_loans',
+#     'dti_wprosper_loan',
+#     'months_employed',
+#     'income_verifiable',
+#     'listing_category_id',
+#     'employment_status_description',
+#     'loan_status',
+# ]
 column_order = [
     'fico_score',
-    'lender_yield',
     'income_range',
-    'listing_monthly_payment',
-    'stated_monthly_income',
-    'lender_indicator',
-    'prior_prosper_loans',
     'dti_wprosper_loan',
-    'months_employed',
-    'income_verifiable',
-    'listing_category_id',
-    'employment_status_description',
     'loan_status',
 ]
 
