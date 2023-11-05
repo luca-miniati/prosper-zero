@@ -13,15 +13,15 @@ hidden_size2 = 64
 # hidden_size3 = 128
 # hidden_size4 = 32
 ouput_size = 2
-num_epochs = 100
+num_epochs = 2
 batch_size = 128
 learning_rate = 0.003  # Learning rate for the optimizer
 
 train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_training.csv')
 val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_val.csv')
 
-train_dataset = ListingsDataset(dataset_path=train_path, dataset_type="train")
-validation_dataset = ListingsDataset(dataset_path=val_path, dataset_type="train")
+train_dataset = ListingsDataset(dataset_path=train_path, dataset_type="train", num_rows=100000)
+validation_dataset = ListingsDataset(dataset_path=val_path, dataset_type="train", num_rows=10000)
 
 input_size = train_dataset.input_dimension # 22
 

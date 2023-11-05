@@ -2,8 +2,10 @@ import pandas as pd
 import torch
 
 class ListingsDataset:
-    def __init__(self, dataset_path, dataset_type):
+    def __init__(self, dataset_path, dataset_type, num_rows=None):
         self.data = pd.read_csv(dataset_path)
+        if num_rows:
+            self.data = self.data.iloc[:num_rows]
         self.type = dataset_type
         self.input_dimension = self.data.shape[-1] - 1
 
