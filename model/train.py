@@ -5,14 +5,14 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_training.csv')
-val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'balanced_mega_val.csv')
+train_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'loans_data_train.csv')
+val_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'clean', 'loans_data_val.csv')
 
 
 train_data = pd.read_csv(train_path)
-train_data = train_data.iloc[:100000]
+# train_data = train_data.iloc[:100000]
 val_data = pd.read_csv(val_path)
-val_data = val_data.iloc[:40000]
+# val_data = val_data.iloc[:40000]
 
 # correlation_matrix = train_data.corr()
 
@@ -21,7 +21,7 @@ val_data = val_data.iloc[:40000]
 
 
 
-
+'''
 X_train = train_data.drop('loan_status', axis=1)
 y_train = train_data['loan_status']
 
@@ -37,3 +37,9 @@ validation_accuracy = model.score(X_validation, y_validation)
 
 print(validation_accuracy)
 predictions = model.predict(X_validation)
+'''
+grouped = train_data.groupby('prosper_rating')
+
+# Calculate the percentage of loan status equal to 1 for each group
+result = grouped['loan_status'].mean() * 100
+print(result)
