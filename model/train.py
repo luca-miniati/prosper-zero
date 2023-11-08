@@ -43,3 +43,4 @@ grouped = train_data.groupby('prosper_rating')
 # Calculate the percentage of loan status equal to 1 for each group
 result = grouped['loan_status'].mean() * 100
 print(result)
+
